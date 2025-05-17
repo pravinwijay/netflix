@@ -1,9 +1,15 @@
-import React from 'react'
-
 const AjoutFilm = () => {
-  return (
-    <div>AjoutFilm</div>
+  return(
+    <>
+      <form>
+        <label>
+          Name:
+          <input type="text" name="name" />
+        </label>
+      <input type="submit" value="Submit" />
+    </form>
+    </>
   )
 }
 
-export default AjoutFilm
+export default AjoutFilm;

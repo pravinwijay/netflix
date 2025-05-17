@@ -1,9 +1,34 @@
-import Section from "../components/LesFilms";
+"use client";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import FilmDisplay from '@/components/FilmDisplay';
+import AjoutFilm from '@/components/AjoutFilm';
 
 export default function Home() {
+  const [films, setFilms] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/films')
+      .then(response => setFilms(response.data))
+      .catch(error => console.error('Error fetching films:', error));
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <Section />
-    </div>
+    <>
+      <div className="grid grid-cols-3 gap-4 p-6">
+        {films.map((film, index) => (
+          <FilmDisplay
+            key={index}
+            nom={film.nom}
+            description={film.description}
+            urlImage={film.url_img}
+            type={film.type}
+          />
+        ))}
+      </div>
+      <button className="fixed bottom-4 right-4 bg-red-500 text-white p-2 rounded">
+        Ajouter un film
+      </button>
+    </>
   );
 }
