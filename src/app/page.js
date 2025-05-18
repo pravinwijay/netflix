@@ -21,14 +21,11 @@ export default function Home() {
             key={index}
             nom={film.nom}
             description={film.description}
-            urlImage={film.url_img}
-            type={film.type}
+            urlImage={film.affiche}
+            genre={film.genre}
           />
         ))}
       </div>
-      <button className="fixed bottom-4 right-4 bg-red-500 text-white p-2 rounded">
-        Ajouter un film
-      </button>
     </>
   );
 }

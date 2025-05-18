@@ -22,6 +22,19 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <nav className="bg-black text-white px-6 py-4 shadow-md">
+          <ul className="flex gap-6">
+            <li>
+              <a href="/" className="hover:underline">Accueil</a>
+            </li>
+            <li>
+              <a href="/films" className="hover:underline">Films</a>
+            </li>
+            <li>
+              <a href="/ajoutFilm" className="hover:underline">Ajouter un film</a>
+            </li>
+          </ul>
+        </nav>
         {children}
       </body>
     </html>
