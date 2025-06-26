@@ -2,8 +2,8 @@ import axios from 'axios';
 const myUrl = "http://localhost:3000/api/films";
 
 export const getFilms = async () => {
-    const data = await axios.get(myUrl);
-    return data;
+    const response = await axios.get(myUrl);
+    return response.data; 
 }
 
 export const addFilm = async (newFilm) => {
@@ -13,3 +13,14 @@ export const addFilm = async (newFilm) => {
         }
     });
 }
+
+export const updateFilm = async (id, updatedFilm) => {
+  const res = await axios.put(`http://localhost:3000/api/films?id=${id}`, updatedFilm, {
+    headers: { 'Content-Type': 'application/json' }
+  });
+  return res.data;
+};
+
+export const deleteFilm = async (id) => {
+  return await axios.delete(`${myUrl}?id=${id}`);
+};

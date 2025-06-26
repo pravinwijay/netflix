@@ -1,7 +1,7 @@
 import axios from "axios";
-const myUrl = "http://localhost:3000/api/categ";
+const myUrl = "http://localhost:3000/api/genre";
 
-export const getCateg = async () => {
-    const data = await axios.get(myUrl);
-    return data;
-}
+export const getGenres = async () => {
+  const response = await axios.get(myUrl);
+  return response.data;
+};

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import AjoutFilm from '@/components/AjoutFilm';
 
 const ajoutFilm = () => {
   return (
-    <div>ajoutFilm</div>
-  )
-}
+    <div>
+      <AjoutFilm />
+    </div>
+  );
+};
 
-export default ajoutFilm
+export default ajoutFilm;

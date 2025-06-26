@@ -1,11 +1,13 @@
-import { connection } from "@/tools/database";
+import { getConnection } from "@/tools/database"; 
 import { NextResponse } from "next/server";
 
-export const GET = async (request) => {
-    try{
-        const [result, fields] = await connection.query("SELECT * FROM genre;");
-        return NextResponse.json(result);
-    } catch(err){
-        return NextResponse.json(err);
-    }
-}
+export const GET = async () => {
+  try {
+    const connection = await getConnection(); 
+    const [result] = await connection.query("SELECT * FROM genre;");
+    return NextResponse.json(result); 
+  } catch (err) {
+    console.error("Erreur API genre :", err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+};

@@ -28,10 +28,13 @@ export default function RootLayout({ children }) {
               <a href="/" className="hover:underline">Accueil</a>
             </li>
             <li>
-              <a href="/films" className="hover:underline">Films</a>
+              <a href="/ajoutFilm" className="hover:underline">Ajouter un film</a>
             </li>
             <li>
-              <a href="/ajoutFilm" className="hover:underline">Ajouter un film</a>
+              <a href="/modifFilm" className="hover:underline">Modifier un film</a>
+            </li>
+             <li>
+              <a href="/supprFilm" className="hover:underline">Supprimer un film</a>
             </li>
           </ul>
         </nav>
