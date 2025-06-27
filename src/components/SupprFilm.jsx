@@ -36,7 +36,7 @@ const SupprFilm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow rounded mt-8">
+    <div className="max-w-md mx-auto p-6 bg-white shadow rounded-xl mt-8 border border-red-800">
       <h1 className="text-xl font-semibold mb-4 text-center">Supprimer un film</h1>
 
       <label className="block mb-2">
@@ -58,7 +58,7 @@ const SupprFilm = () => {
       <button
         onClick={handleDelete}
         disabled={!selectedFilmId}
-        className="mt-4 w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:opacity-50"
+        className="mt-4 w-full bg-red-600 text-white py-2 rounded-full hover:bg-red-700 disabled:opacity-50"
       >
         Supprimer
       </button>

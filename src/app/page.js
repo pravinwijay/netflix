@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import FilmDisplay from '@/components/FilmDisplay';
-import AjoutFilm from '@/components/AjoutFilm';
 
 export default function Home() {
   const [films, setFilms] = useState([]);

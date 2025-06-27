@@ -4,11 +4,12 @@ const FilmDisplay = ({ nom, description, urlImage, genre }) => {
       <img
         src={urlImage}
         alt={nom}
-        className="w-full h-64 object-cover rounded-xl bg-lime-300"
+        className="w-full h-64 object-cover rounded-xl bg-lime-300 shadow-md"
       />
-      <p className="mt-4 text-center text-sm text-gray-800">{description}</p>
+      <h2 className="text-lg font-bold text-center">{nom}</h2>
+      <p className="mt-1 text-center text-sm text-gray-800">{description}</p>
       <span className="text-xs italic text-gray-600">{genre}</span>
-      <button className="mt-4 border border-black px-4 py-1 rounded hover:bg-gray-100">
+      <button className="mt-2 border border-black px-4 py-1 rounded hover:bg-gray-100">
         En savoir plus
       </button>
     </div>
