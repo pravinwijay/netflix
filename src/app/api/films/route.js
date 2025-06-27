@@ -1,15 +1,29 @@
 import { getConnection } from "@/tools/database";
 import { NextResponse } from "next/server";
 
+
 export const GET = async (request) => {
   try {
+    const { searchParams } = new URL(request.url);
+    const genre = searchParams.get("genre");
+
     const connection = await getConnection();
-    const [result, fields] = await connection.query("SELECT film.id_film AS id, film.nom, film.description, film.affiche, genre.libelle AS genre FROM film JOIN genre ON genre.id_genre = film.id_genre;");
+    const query = genre
+      ? `SELECT film.id_film AS id, film.nom, film.description, film.affiche, genre.libelle AS genre
+         FROM film JOIN genre ON genre.id_genre = film.id_genre
+         WHERE genre.libelle = ?`
+      : `SELECT film.id_film AS id, film.nom, film.description, film.affiche, genre.libelle AS genre
+         FROM film JOIN genre ON genre.id_genre = film.id_genre`;
+
+    const [result] = genre
+      ? await connection.query(query, [genre])
+      : await connection.query(query);
+
     return NextResponse.json(result);
   } catch (err) {
-    return NextResponse.json(err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
-}
+};
 
 export const POST = async (request) => {
   try {
