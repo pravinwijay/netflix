@@ -36,6 +36,19 @@ export default function RootLayout({ children }) {
              <li>
               <a href="/supprFilm" className="hover:underline">Supprimer un film</a>
             </li>
+            -
+              <li>
+              <a href="/films/Action" className="hover:underline">Actions</a>
+            </li>
+              <li>
+              <a href="/films/Aventure" className="hover:underline">Aventure</a>
+            </li>
+              <li>
+              <a href="/films/Comédie" className="hover:underline">Comédie</a>
+            </li>
+              <li>
+              <a href="/films/Crime" className="hover:underline">Crime</a>
+            </li>
           </ul>
         </nav>
         {children}

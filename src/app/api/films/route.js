@@ -6,6 +6,9 @@ import Log from "@/models/log";           // Modèle de log Mongo
 // GET - Liste des films
 export const GET = async (request) => {
   try {
+    const { searchParams } = new URL(request.url);
+    const genre = searchParams.get("genre");
+
     const connection = await getConnection();
     const [result] = await connection.query(
       `SELECT film.id_film AS id, film.nom, film.description, film.affiche, genre.libelle AS genre
@@ -15,7 +18,9 @@ export const GET = async (request) => {
     return NextResponse.json(result);
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
+};
 };
 
 // POST - Ajouter un film + log

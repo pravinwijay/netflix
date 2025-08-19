@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getFilms } from '../controller/film';
 import FilmDisplay from './FilmDisplay';
 
-const FilmsListDisplay = () => {
+const FilmsParGenre = () => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const FilmsListDisplay = () => {
   );
 };
 
-export default FilmsListDisplay;
+export default FilmsParGenre;

@@ -6,6 +6,11 @@ export const getFilms = async () => {
     return response.data; 
 }
 
+export const getFilmsParGenre = async (genre) => {
+  const response = await axios.get(`${myUrl}?genre=${encodeURIComponent(genre)}`);
+  return response.data;
+};
+
 export const addFilm = async (newFilm) => {
     const data = await axios.post(myUrl, newFilm, {
         headers: {

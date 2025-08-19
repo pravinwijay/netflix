@@ -47,7 +47,7 @@ const ModifFilm = () => {
 
   console.log("Films dans le composant :", films);
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto bg-white p-6 rounded shadow">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto bg-white p-6 rounded-xl border border-yellow-600 shadow mt-10">
       <label className="block">
         <span className="text-gray-700">Choisir un film</span>
         <select
@@ -90,7 +90,7 @@ const ModifFilm = () => {
         </select>
       </label>
 
-      <button type="submit" className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Modifier le film</button>
+      <button type="submit" className="w-full bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-700">Modifier le film</button>
     </form>
   );
 };

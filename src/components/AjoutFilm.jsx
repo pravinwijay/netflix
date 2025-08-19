@@ -40,7 +40,7 @@ const AjoutFilm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto bg-white p-6 rounded shadow">
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto bg-white p-6 rounded-xl border border-green-500 shadow mt-10">
 
       <label className="block">
         <span className="text-gray-700">Nom</span>
@@ -55,11 +55,11 @@ const AjoutFilm = () => {
 
       <label className="block">
         <span className="text-gray-700">Description</span>
-        <input
-          type="text"
+        <textarea
           name="description"
           value={formData.description}
           onChange={handleChange}
+          rows="4"
           className="mt-1 block w-full rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200"
         />
       </label>
@@ -95,7 +95,7 @@ const AjoutFilm = () => {
       <input
         type="submit"
         value="Ajouter le film"
-        className="w-full py-2 px-4 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+        className="w-full py-2 px-4 bg-green-600 text-white rounded-full hover:bg-green-700"
       />
     </form>
   );
