@@ -1,16 +1,24 @@
 import { getConnection } from "@/tools/database";
 import { NextResponse } from "next/server";
+import connectMongo from "@/tools/mongo"; // Connexion à MongoDB
+import Log from "@/models/log";           // Modèle de log Mongo
 
+// GET - Liste des films
 export const GET = async (request) => {
   try {
     const connection = await getConnection();
-    const [result, fields] = await connection.query("SELECT film.id_film AS id, film.nom, film.description, film.affiche, genre.libelle AS genre FROM film JOIN genre ON genre.id_genre = film.id_genre;");
+    const [result] = await connection.query(
+      `SELECT film.id_film AS id, film.nom, film.description, film.affiche, genre.libelle AS genre
+       FROM film
+       JOIN genre ON genre.id_genre = film.id_genre;`
+    );
     return NextResponse.json(result);
   } catch (err) {
-    return NextResponse.json(err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
-}
+};
 
+// POST - Ajouter un film + log
 export const POST = async (request) => {
   try {
     const body = await request.json();
@@ -22,12 +30,17 @@ export const POST = async (request) => {
       [nom, description, affiche, genre]
     );
 
+    // Enregistrement du log
+    await connectMongo();
+    await Log.create({ action: "create", filmName: nom });
+
     return NextResponse.json({ message: "Film ajouté", id: result.insertId });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 };
 
+// PUT - Modifier un film + log
 export const PUT = async (request) => {
   try {
     const { searchParams } = new URL(request.url);
@@ -41,6 +54,10 @@ export const PUT = async (request) => {
       [nom, description, affiche, genre, id]
     );
 
+    // Enregistrement du log
+    await connectMongo();
+    await Log.create({ action: "update", filmName: nom });
+
     return NextResponse.json({ message: "Film mis à jour" });
   } catch (err) {
     console.error("Erreur PUT :", err);
@@ -48,6 +65,7 @@ export const PUT = async (request) => {
   }
 };
 
+// DELETE - Supprimer un film + log
 export const DELETE = async (request) => {
   try {
     const { searchParams } = new URL(request.url);
@@ -58,7 +76,16 @@ export const DELETE = async (request) => {
     }
 
     const connection = await getConnection();
+
+    // Récupère le nom du film avant suppression
+    const [films] = await connection.execute("SELECT nom FROM film WHERE id_film = ?", [id]);
+    const nom = films[0]?.nom || "Inconnu";
+
     await connection.execute("DELETE FROM film WHERE id_film = ?", [id]);
+
+    // Enregistrement du log
+    await connectMongo();
+    await Log.create({ action: "delete", filmName: nom });
 
     return NextResponse.json({ message: "Film supprimé" });
   } catch (err) {
